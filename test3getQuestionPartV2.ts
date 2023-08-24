@@ -31,60 +31,10 @@ function getQuestionPart(phrases: Array<string>){
     } 
 
   }
-  console.log(dataCheck)
-
-  let b = [[1], [1, 6], [6]] 
-let a1  = ["BATHROOM", "BATH SALTS", "BLOODBATH"]; 
-
-let c = 0
-let w1 = ""
-let w2 = ""
-let w3 = ""
-
-let result :Boolean = true;
-function checkForward(){
-    while (true) {
-    
-    w1 += a1[0][1+c]
-    w2 += a1[1][1+c]
-    w3 += a1[2][1+c]
-    console.log(w1,w2)
-    if(w1 != w2 || 1+c > a1[0].length || 1+c > a1[1].length ){
-        result = false;
-        break;
-        // console.log("break")
-    }
-    c++
-} 
-return result
-}
-
-console.log(result)
-//checkForward()
-
-// function checkForward2(){
-//     let c = 0
-//     while (true) {
-    
-//     w1 += a1[0].substring(1,1+c)
-//     w2 += a1[1].substring(1,1+c)
-//     w3 += a1[2].substring(1,1+c)
-//     console.log(w1,w2)
-//     if(w1 != w2 ||  1+c == 0){
-//         break;
-//         console.log("break")
-//     }
-//     c--
-// } 
-// }
-
-// checkForward2()
-checkForward()
+  //  console.log(dataCheck)
 
 
-  let aaa = "BATH";
 
-  let awnserVowel: Array<string> = [];
   let indexSet: Array<Array<number>> = [];
 
   for(let y: number = 0; y <vowels.length; y++){
@@ -95,8 +45,84 @@ checkForward()
     }
   }
 
+  
 
-  let question:string = "BATH"
+
+    let w1 = ""
+    let w2 = ""
+    /// Start///
+    findword(phrases,indexSet)
+    /// Start///
+
+
+    //////// Functions 1//////
+    function findword(words: Array<string>,positions: Array<Array<number>>){
+        for(let i = 0; i < words.length-1; i++){
+          let match = false
+          let j =0
+            if(match == false){
+            let j = 0;
+            let k = 0;
+            while(true){
+          checkForward(words,i,positions[i][j],positions[i][k])
+              if(w1 == w2){
+                          match = true
+                          console.log(w1,w2, w1 == w2)
+                          break;
+                  }
+              k++
+              if(k>positions[i+1].length){
+                j++
+              } 
+            }
+          }
+        }  
+    }
+    //////// Functions 1//////
+
+    //////// Functions 2//////
+    function checkForward(wordsArray: Array<string>,wordIndex: number,w1Vowel : number,w2Vowel : number){
+        let count = 0
+        w1 = ""
+        w2 = ""
+       
+        while (true) {
+          if(w1 != w2 || 
+            count == a1[wordIndex].substring(w1Vowel).length ||
+            count == a1[wordIndex+1].substring(w2Vowel).length
+            ){
+              console.log(w1,w2)        
+              break;
+          }
+          
+          w1 += wordsArray[wordIndex][w1Vowel+count]
+          w2 += wordsArray[wordIndex+1][w2Vowel+count]
+          count++
+        } 
+
+    }
+    //////// Functions 2//////
+
+    //////// Functions 3//////
+    function checkForward2(wordsArray: Array<string>,wordIndex: number,w1Vowel : number,w2Vowel : number){
+        let count = 0
+        while (true) {
+        
+        w1 += wordsArray[wordIndex].substring(1,w1Vowel+count)
+        w2 += wordsArray[wordIndex+1].substring(1,w2Vowel+count)
+
+        console.log(w1,w2)
+        if(w1 != w2 ||  1+count == 0){
+            break;
+
+        }
+        count--
+    } 
+    }
+    //////// Functions 3//////
+
+
+  let question:string = w1
   for(let i:number =0; i < phrases.length; i++ ){
     phrases[i] = phrases[i].replace(question,"");
     phrases[i] = phrases[i].replace(" ","");
@@ -107,5 +133,5 @@ checkForward()
   return phrases
 }
 
-// getQuestionPart(a1);
-getQuestionPart(a2);
+getQuestionPart(a1);
+// getQuestionPart(a2);
