@@ -86,7 +86,7 @@ function getQuestionPart(phrases: Array<string>){
                       checkForward(words,i,positions[i][j],positions[i+1][k]) 
                       if(forward1 == forward2){
                               match = true
-                              console.log("BB",forward1,forward2, forward1 == forward2)
+                              console.log("Back",forward1,forward2, forward1 == forward2)
                           return match;
                       } 
                     } else if(movingWord == "Backward"){
@@ -95,10 +95,13 @@ function getQuestionPart(phrases: Array<string>){
                           match = true
                           if(backward1 == backward2 && backward1 != ""){
                             let temp = ""
-                            for(let p = backward1.length -1; p >0; p--){
+                            console.log(backward1)
+                            for(let p: number = backward1.length -1; p >=0; p--){
+                              console.log("test",p,backward1[p])
                               temp += backward1[p]
                             }
-                            console.log(temp)
+                            backward1 = temp
+                            backward2 = temp
                           }
                           return match;
                       } 
@@ -148,21 +151,19 @@ function getQuestionPart(phrases: Array<string>){
         	backward1 += wordsArray[wordIndex].substring(w1Vowel-1 + count,w1Vowel+count)
         	backward2 += wordsArray[wordIndex+1].substring(w2Vowel-1 + count,w2Vowel+count)
 
-        	console.log(backward1, " ", backward2)
-        	console.log(w1Vowel-1 + count, " ", w2Vowel+count)
+        	console.log("Front",backward1, " ", backward2)
+
 
 	        if(backward1 != backward2 ){
         	    	backward1 = backward1.substring(0,backward1.length-1)
                 backward2 = backward2.substring(0,backward2.length-1)
-                    // console.log(backward1 == backward2)
-                    // console.log(backward1, " ", backward2)
+  
 
                 break;
 		
 	        }
           if(backward1 == wordsArray[wordIndex][0] || backward2 == wordsArray[wordIndex+1][0] && backward1 == backward2){
                 console.log("Blank",backward1 == backward2)
-                console.log("Blank",backward1, " ", backward2)
           break;
           }
         	count--
