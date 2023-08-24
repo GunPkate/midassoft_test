@@ -48,25 +48,25 @@ function getQuestionPart(phrases: Array<string>){
   
 
     /// Start///
-
-    let forward1 = ""
-    let forward2 = ""
-    let backward1 = ""
-    let backward2 = ""
-      let awnser:string = ""
-    /// Start///
-    let matchForward :boolean = findword(phrases,indexSet,"Forward");
-    if(matchForward == true){     
-      let matchBackward :boolean = findword(phrases,indexSet,"Backward");
-      if(matchForward ==  matchBackward){
-        awnser = backward1 + forward1 
-      }
-    }
-    console.log(awnser)
-    for(let i:number =0; i < phrases.length; i++ ){
-      phrases[i] = phrases[i].replace(awnser,"");
-      phrases[i] = phrases[i].replace(" ","");
-    }
+  
+        let forward1 = ""
+        let forward2 = ""
+        let backward1 = ""
+        let backward2 = ""
+          let awnser:string = ""
+        /// Start///
+        let matchForward :boolean = findword(phrases,indexSet,"Forward");
+        if(matchForward == true){     
+          let matchBackward :boolean = findword(phrases,indexSet,"Backward");
+          if(matchForward ==  matchBackward){
+            awnser = backward1 + forward1 
+          }
+        }
+        console.log("awnser", awnser)
+        for(let i:number =0; i < phrases.length; i++ ){
+          phrases[i] = phrases[i].replace(awnser,"");
+          phrases[i] = phrases[i].replace(" ","");
+        }
     
     /// End///
 
@@ -86,14 +86,20 @@ function getQuestionPart(phrases: Array<string>){
                       checkForward(words,i,positions[i][j],positions[i+1][k]) 
                       if(forward1 == forward2){
                               match = true
-                              console.log(forward1,forward2, forward1 == forward2)
+                              console.log("BB",forward1,forward2, forward1 == forward2)
                           return match;
                       } 
                     } else if(movingWord == "Backward"){
                       checkBackward(words,i,positions[i][j],positions[i+1][k]) 
-                      if(backward1 == backward2){
+                      if((backward1 == backward2) && backward1 != ""){
                           match = true
-                          console.log(backward1,backward2, backward1 == backward2)
+                          if(backward1 == backward2 && backward1 != ""){
+                            let temp = ""
+                            for(let p = backward1.length -1; p >0; p--){
+                              temp += backward1[p]
+                            }
+                            console.log(temp)
+                          }
                           return match;
                       } 
                     }
@@ -148,21 +154,15 @@ function getQuestionPart(phrases: Array<string>){
 	        if(backward1 != backward2 ){
         	    	backward1 = backward1.substring(0,backward1.length-1)
                 backward2 = backward2.substring(0,backward2.length-1)
-                    console.log(backward1 == backward2)
-                    console.log(backward1, " ", backward2)
-          if(backward1 == backward2 && backward1 != ""){
-            let temp = ""
-            for(let p = backward1.length -1; p >0; p--){
-              temp += backward1[p]
-            }
-            console.log(temp)
-          }
-          break;
+                    // console.log(backward1 == backward2)
+                    // console.log(backward1, " ", backward2)
+
+                break;
 		
 	        }
-          if(backward1 == wordsArray[wordIndex][0] || backward2 == wordsArray[wordIndex+1][0]){
-                console.log(backward1 == backward2)
-                console.log(backward1, " ", backward2)
+          if(backward1 == wordsArray[wordIndex][0] || backward2 == wordsArray[wordIndex+1][0] && backward1 == backward2){
+                console.log("Blank",backward1 == backward2)
+                console.log("Blank",backward1, " ", backward2)
           break;
           }
         	count--
@@ -174,9 +174,9 @@ function getQuestionPart(phrases: Array<string>){
 
 
   // console.log(dataCheck)
-  // console.log(phrases)
+  console.log(phrases)
   return phrases
 }
 
-getQuestionPart(a1);
-// getQuestionPart(a2);
+// getQuestionPart(a1);
+getQuestionPart(a2);
