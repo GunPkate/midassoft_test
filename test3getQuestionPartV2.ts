@@ -1,9 +1,10 @@
 getQuestionPart(["BATHROOM", "BATH SALTS", "BLOODBATH"]);
 getQuestionPart(["BEFRIEND", "GIRLFRIEND", "FRIENDSHIP"]);
+// getQuestionPart(["BEGONE",  "BUBLE BEE", "BEWARE"]);
 
 function getQuestionPart(phrases: Array<string>){
   
-  let vowels = ["A","E","I","O","U"];
+  let vowels: Array<string> = ["A","E","I","O","U"];
   
   interface checkVowels  {
     vowel: string,
@@ -50,10 +51,10 @@ function getQuestionPart(phrases: Array<string>){
 
     /// Start///
   
-        let forward1 = ""
-        let forward2 = ""
-        let backward1 = ""
-        let backward2 = ""
+        let forward1: string = ""
+        let forward2: string = ""
+        let backward1: string = ""
+        let backward2: string = ""
           let awnser:string = ""
         /// Start///
         let matchForward :boolean = findword(phrases,indexSet,"Forward");
