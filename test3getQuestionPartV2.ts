@@ -48,56 +48,59 @@ function getQuestionPart(phrases: Array<string>){
   
 
 
-    let w1 = ""
-    let w2 = ""
+    let forward1 = ""
+    let forward2 = ""
     /// Start///
-    findword(phrases,indexSet)
+    let matchForward:boolean = findword(phrases,indexSet,"Forward");
+    
     /// Start///
 
 
     //////// Functions 1//////
-    function findword(words: Array<string>,positions: Array<Array<number>>){
-        for(let i = 0; i < words.length-1; i++){
-          let match = false
-          let j =0
-            if(match == false){
-            let j = 0;
-            let k = 0;
-            while(true){
-          checkForward(words,i,positions[i][j],positions[i+1][k])
-              if(w1 == w2){
-                          match = true
-                          console.log(w1,w2, w1 == w2)
-                          break;
+    function findword(words: Array<string>,positions: Array<Array<number>>, movingWord: string): boolean{
+        let match = false
+        try{
+          for(let i = 0; i < words.length-1; i++){
+
+            let j =0
+              if(match == false){
+              for(let j = 0; j < positions[i].length; j++){
+                  for(let k = 0; k < positions[i+1].length; k ++){
+                    movingWord == "Forward"?   checkForward(words,i,positions[i][j],positions[i+1][k]) : 0
+                    if(forward1 == forward2){
+                            match = true
+                            console.log(forward1,forward2, forward1 == forward2)
+                        return match;
+                    }
                   }
-              k++
-              if(k>positions[i+1].length){
-                j++
-                k =0
-              } 
+              }
             }
-          }
-        }  
+          }  
+          return match;
+        } catch (err){
+          console.error(err);
+          return match;
+        }
     }
     //////// Functions 1//////
 
     //////// Functions 2//////
     function checkForward(wordsArray: Array<string>,wordIndex: number,w1Vowel : number,w2Vowel : number){
         let count = 0
-        w1 = ""
-        w2 = ""
+        forward1 = ""
+        forward2 = ""
        
         while (true) {
-          if(w1 != w2 || 
+          if(forward1 != forward2 || 
             count == a1[wordIndex].substring(w1Vowel).length ||
             count == a1[wordIndex+1].substring(w2Vowel).length
             ){
-              console.log(w1,w2)        
+              console.log(forward1,forward2)        
               break;
           }
           
-          w1 += wordsArray[wordIndex][w1Vowel+count]
-          w2 += wordsArray[wordIndex+1][w2Vowel+count]
+          forward1 += wordsArray[wordIndex][w1Vowel+count]
+          forward2 += wordsArray[wordIndex+1][w2Vowel+count]
           count++
         } 
 
@@ -109,11 +112,11 @@ function getQuestionPart(phrases: Array<string>){
         let count = 0
         while (true) {
         
-        w1 += wordsArray[wordIndex].substring(1,w1Vowel+count)
-        w2 += wordsArray[wordIndex+1].substring(1,w2Vowel+count)
+        forward1 += wordsArray[wordIndex].substring(1,w1Vowel+count)
+        forward2 += wordsArray[wordIndex+1].substring(1,w2Vowel+count)
 
-        console.log(w1,w2)
-        if(w1 != w2 ||  1+count == 0){
+        console.log(forward1,forward2)
+        if(forward1 != forward2 ||  1+count == 0){
             break;
 
         }
@@ -123,7 +126,7 @@ function getQuestionPart(phrases: Array<string>){
     //////// Functions 3//////
 
 
-  let question:string = w1
+  let question:string = forward1
   for(let i:number =0; i < phrases.length; i++ ){
     phrases[i] = phrases[i].replace(question,"");
     phrases[i] = phrases[i].replace(" ","");
@@ -134,5 +137,5 @@ function getQuestionPart(phrases: Array<string>){
   return phrases
 }
 
-getQuestionPart(a1);
-// getQuestionPart(a2);
+// getQuestionPart(a1);
+getQuestionPart(a2);
