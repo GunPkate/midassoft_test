@@ -64,7 +64,7 @@ function getQuestionPart(phrases: Array<string>){
             let j = 0;
             let k = 0;
             while(true){
-          checkForward(words,i,positions[i][j],positions[i][k])
+          checkForward(words,i,positions[i][j],positions[i+1][k])
               if(w1 == w2){
                           match = true
                           console.log(w1,w2, w1 == w2)
@@ -73,6 +73,7 @@ function getQuestionPart(phrases: Array<string>){
               k++
               if(k>positions[i+1].length){
                 j++
+                k =0
               } 
             }
           }
