@@ -1,5 +1,6 @@
-let a1: Array<string>  = ["BATHROOM", "BATH SALTS", "BLOODBATH"];
-let a2: Array<string>  = ["BEFRIEND", "GIRLFRIEND", "FRIENDSHIP"];
+getQuestionPart(["BATHROOM", "BATH SALTS", "BLOODBATH"]);
+getQuestionPart(["BEFRIEND", "GIRLFRIEND", "FRIENDSHIP"]);
+
 function getQuestionPart(phrases: Array<string>){
   
   let vowels = ["A","E","I","O","U"];
@@ -126,8 +127,8 @@ function getQuestionPart(phrases: Array<string>){
        
         while (true) {
           if(forward1 != forward2 || 
-            count == a1[wordIndex].substring(w1Vowel).length ||
-            count == a1[wordIndex+1].substring(w2Vowel).length
+            count == wordsArray[wordIndex].substring(w1Vowel).length ||
+            count == wordsArray[wordIndex+1].substring(w2Vowel).length
             ){
               console.log(forward1,forward2)        
               break;
@@ -179,5 +180,3 @@ function getQuestionPart(phrases: Array<string>){
   return phrases
 }
 
-// getQuestionPart(a1);
-getQuestionPart(a2);
